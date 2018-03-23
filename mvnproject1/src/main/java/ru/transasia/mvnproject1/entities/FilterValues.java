@@ -21,7 +21,7 @@ public class FilterValues {
     public FilterValues (){}
 
     public void addNewValue(String key, String value){
-        filters.put(key,value);
+        filters.put(key, value);
     }
 
     public String getSortBy() {
