@@ -50,27 +50,36 @@ public class ListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
+        FilterValues filterMap = new FilterValues();
+        
         //Get entity parameters from POST request
         String partName = req.getParameter("pname");
-        if (partName == null) partName = "";
+        if (!partName.equals("")) filterMap.addNewValue("partName", partName);
+        
         String partNumber = req.getParameter("pnumber");
-        if (partNumber == null) partNumber = "";
+        if (!partNumber.equals("")) filterMap.addNewValue("partNumber", partNumber);
+        
         String vendor = req.getParameter("vendor");
-        if (vendor == null) vendor = "";
+        if (!vendor.equals("")) filterMap.addNewValue("vendor", vendor);
+        
         String quantity = req.getParameter("qty");
-        if (quantity == null) quantity = "";
-        int qty = 0;
+        if (!quantity.equals("")) filterMap.addNewValue("qty", quantity);
+        
+        //TODO Change date format into string h2 accepts
         String shpdAfter = req.getParameter("shippedAfter");
-        if (shpdAfter == null) shpdAfter = "";
+        if (!shpdAfter.equals("")) filterMap.addNewValue("shpdAfter", shpdAfter);
         Date shippedAfter = null;
+        
         String shpdBefore = req.getParameter("shippedBefore");
-        if (shpdBefore == null) shpdBefore = "";
+        if (!shpdBefore.equals("")) filterMap.addNewValue("shpdBefore", shpdBefore);
         Date shippedBefore = null;
+        
         String rcvdAfter = req.getParameter("receivedAfter");
-        if (rcvdAfter == null) rcvdAfter = "";
+        if (!rcvdAfter.equals("")) filterMap.addNewValue("rcvdAfter", rcvdAfter);
         Date receivedAfter = null;
+        
         String rcvdBefore = req.getParameter("receivedBefore");
-        if (rcvdBefore == null) rcvdBefore = "";
+        if (!rcvdBefore.equals("")) filterMap.addNewValue("rcvdBefore", rcvdBefore);
         Date receivedBefore = null;
 
         //get sorting parameter from POST request and define order
@@ -101,8 +110,8 @@ public class ListServlet extends HttpServlet {
         }
 
         //creates new entity FilterValues with all the filter values entered by user
-        FilterValues fv = new FilterValues (partName, partNumber, vendor, qty, shippedAfter, shippedBefore,
-                receivedAfter, receivedBefore, sortBy, sortingOrder);
+//        FilterValues fv = new FilterValues (partName, partNumber, vendor, qty, shippedAfter, shippedBefore,
+//                receivedAfter, receivedBefore, sortBy, sortingOrder);
 
         //send created filter entity to Model and get list of filtered parts
         //Model model = Model.getInstance();
